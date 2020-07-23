@@ -6,7 +6,7 @@
 class Player: public Creature
 {
 public:
-	Player(const char* name, const char* description, Entity* parent, Room* location);
+	Player(const char* name, const char* description, Room* location);
 	~Player();
 
 	int health;

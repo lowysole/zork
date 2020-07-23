@@ -9,6 +9,7 @@ using namespace std;
 
 enum ItemType {
 	WEAPON,
+	ARMOUR,
 	OBJECT
 };
 

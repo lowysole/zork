@@ -15,6 +15,7 @@ public:
 	bool locked;
 	string opposite_name;
 	Room* destination;
+	Entity* key;
 	
 };
 

@@ -13,12 +13,13 @@ class Player;
 class World 
 {
 private:
-	//list<Entity*> entities;
-	//Player* player;
+	list<Entity*> entities;
+	Player* player;
+	char* player_name;
 
 public :	
 	World();
-	//~World();
+	~World();
 
 	bool ParseCommand(vector<string>& args);
 

@@ -6,7 +6,7 @@
 class Npc : public Creature
 {
 public:
-	Npc(const char* name, const char* description, Entity* parent, Room* location);
+	Npc(const char* name, const char* description, Room* location);
 	~Npc();
 	
 	int health;

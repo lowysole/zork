@@ -13,7 +13,7 @@ class Room;
 class Creature: public Entity
 {
 public:
-	Creature(const char* name, const char* description, Entity* parent, Room* location);
+	Creature(const char* name, const char* description, Room* location);
 	~Creature();
 
 	CreatureType creature_type;

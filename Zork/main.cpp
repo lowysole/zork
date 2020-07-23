@@ -30,13 +30,13 @@ int main()
 	{
 		cin >> player_input;
 		ParseInput(player_input, args);
-		cout << args[0];
+
 		if (args.size() > 0 && args[0] == "help")
 			cout << help << endl;
 		else if (args.size() > 0 && args[0] == "quit")
 			break;
 
-		if (my_world.ParseArgs(args) == false)
+		if (my_world.ParseCommand(args) == false)
 			cout << "\nSorry, I do not understand your command.\n";
 
 		if (args.size() > 0)

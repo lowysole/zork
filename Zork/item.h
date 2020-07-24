@@ -19,6 +19,8 @@ public:
 	Item(const char* name, const char* description, Entity*	parent, ItemType item_type = OBJECT);
 	~Item();
 
+	virtual void Look();
+
 	int min_value;
 	int max_value;
 	ItemType item_type;

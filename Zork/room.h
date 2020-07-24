@@ -1,6 +1,7 @@
 #ifndef __Room__
 #define __Room__
 
+#include <vector>
 #include <string>
 #include "entity.h"
 
@@ -14,7 +15,7 @@ public:
 	Room(const char* name, const char* description);
 	~Room();
 
-	//void Look() const;
+	void Look();
 	//Exit* GetExit(const string& description);
 };
 

@@ -11,3 +11,20 @@ Entity(name, description, parent) {
 //Destructor
 Item::~Item() {
 }
+
+// TODO: Fix Look
+void Item::Look()
+{
+	cout << name << endl;
+	cout << description << endl;
+
+	list<Entity*> stuff;
+	//FindAll(ITEM, stuff);
+
+	if (stuff.size() > 0)
+	{
+		cout << "It contains: " << "\n";
+		for (list<Entity*>::iterator it = stuff.begin(); it != stuff.end(); ++it)
+			cout << (*it)->name << "\n";
+	}
+}

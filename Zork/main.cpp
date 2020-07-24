@@ -28,7 +28,7 @@ int main()
 
 	while (1)
 	{
-		cin >> player_input;
+		getline(cin, player_input);
 		ParseInput(player_input, args);
 
 		if (args.size() > 0 && args[0] == "help")

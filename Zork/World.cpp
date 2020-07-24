@@ -12,7 +12,7 @@
 World::World() {
 	// Create Rooms
 	Room* garden = new Room("Garden",
-		"You're outside, in the hospital garden." 
+		"You're outside, in the hospital garden. " 
 		"Tall trees stand around you.");
 	Room* hall = new Room("Hall", 
 		"You're inside the Hospital, there are a lot of patients inside.");
@@ -56,11 +56,11 @@ World::World() {
 
 	// Create NPC
 	Npc* security_guard = new Npc(
-		"security", "It's the Security guard from the hospital",
+		"Security Guard ", "It's the Security guard from the hospital",
 		security_room);
 	security_guard->health = 10;
 	Npc* elevator_guard = new Npc(
-		"worker", "It's the guard from the elevator",
+		"Worker", "It's the guard from the elevator",
 		elevator);
 
 	security_guard->health = 10;
@@ -70,7 +70,9 @@ World::World() {
 	entities.push_back(elevator_guard);
 
 	// Create Items
-	Item* letter = new Item("Letter", "Letter with the mision", garden);
+	Item* letter = new Item(
+		"Letter", "Mission: You need to recover the virus "
+		"and escape from the hospital", garden);
 	Item* key = new Item(
 		"Card", "Card to enter to the infarmary.", security_guard);
 	ex_elevator_infirmary->key = key;
@@ -94,7 +96,7 @@ World::World() {
 	cout << "What's your name?" << endl << "> ";
 	cin >> name_input;
 	cout << "> ";
-	Player* player = new Player(name_input.c_str(), "You're the secret agent!", garden);
+	player = new Player(name_input.c_str(), "You're the secret agent!", garden);
 	player->health = 10;
 
 	entities.push_back(player);
@@ -119,19 +121,15 @@ bool World::ParseCommand(vector<string>& args) {
 		{
 			if (Compare(args[0], "look")) 
 			{
-				cout << "look chosen" << endl;
-			}
-			else if (Compare(args[0], "go"))
-			{
-				cout << "go chosen" << endl;
+				player->Look(args);
 			}
 			else if(Compare(args[0], "stats"))
 			{
-				cout << "stats chosen" << endl;
+				// TODO
 			}
-			else if (Compare(args[0], "inventory"))
+			else if (Compare(args[0], "bag"))
 			{
-				cout << "inventory chosen" << endl;
+				// TODO
 			}
 			else
 			{
@@ -143,7 +141,7 @@ bool World::ParseCommand(vector<string>& args) {
 		{
 			if (Compare(args[0], "look"))
 			{
-				// TODO
+				player->Look(args);
 			}
 			else if (Compare(args[0], "go"))
 			{

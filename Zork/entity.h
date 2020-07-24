@@ -1,6 +1,7 @@
 #ifndef __Entity__
 #define __Entity__
 
+#include <iostream>
 #include <string>
 #include <list>
 
@@ -20,6 +21,8 @@ class Entity
 public:
 	Entity(const char* name, const char* description, Entity* parent);
 	~Entity();
+
+	void Look();
 
 	EntityType entity_type;
 	string name;

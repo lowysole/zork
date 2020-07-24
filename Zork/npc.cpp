@@ -12,3 +12,10 @@ Npc::Npc(const char* name, const char* description, Room* location) :
 Npc::~Npc() {
 
 }
+
+bool Npc::isAlive() {
+	if (this->health > 0) {
+		return true;
+	}
+	return false;
+}

@@ -16,6 +16,8 @@ public:
 	Creature(const char* name, const char* description, Room* location);
 	~Creature();
 
+	virtual void Look();
+
 	CreatureType creature_type;
 	Room* location;
 };

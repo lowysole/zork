@@ -9,7 +9,8 @@ public:
 	Npc(const char* name, const char* description, Room* location);
 	~Npc();
 	
+	bool isAlive();
 	int health;
 };
 
-#endif // !__Npc__
+#endif // __Npc__

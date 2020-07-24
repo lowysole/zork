@@ -3,10 +3,11 @@
 #include "creature.h"
 #include "npc.h"
 #include "exit.h"
+#include "utils.h"
 
 //Constructor
 Room::Room(const char* name, const char* description) :
-Entity(name, description, this)
+Entity(name, description, NULL)
 {
 	this->entity_type = ROOM;
 }
@@ -27,7 +28,7 @@ void Room::Look() {
 	{
 		if ((*it)->entity_type == EXIT) {
 			Exit* ex = (Exit*)*it;
-			cout << "From " << ex->GetRoomName(this) << " you see " << ex->GetRoomDestination(this)->name << endl;
+			cout << "You can go to " << ex->GetNameDestination(this) << endl;
 		}
 	}
 
@@ -56,4 +57,16 @@ void Room::Look() {
 			}
 		}
 	}
+}
+
+Exit* Room::GetExit(const string& dest) {
+	for (list<Entity*>::iterator it = container.begin(); it != container.end(); ++it) {
+		if ((*it)->entity_type == EXIT) {
+			Exit* exit = (Exit*)*it;
+			if (Compare(exit->GetNameDestination(this), dest)) {
+				return exit;
+			}
+		}
+	}
+	return NULL;
 }

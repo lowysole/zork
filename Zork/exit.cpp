@@ -4,11 +4,12 @@
 //Constructor
 Exit::Exit(const char* name, const char* opposite_name, const char* description, Room* origin, Room* destination):
 Entity(name, description, (Entity*)origin){
-	this->destination = destination;
 	this->opposite_name = opposite_name;
 	this->locked = false;
 	this->entity_type = EXIT;
 	this->blocked = false;
+	this->destination = destination;
+	destination->container.push_back(this);
 }
 
 //Destructor
@@ -16,7 +17,7 @@ Exit::~Exit()
 {
 }
 
-const string& Exit::GetRoomName(const Room* room) {
+const string& Exit::GetNameDestination(const Room* room) {
 	if (room == parent) {
 		return name;
 	}

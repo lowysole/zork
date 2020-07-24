@@ -18,9 +18,9 @@ World::World() {
 		"You're inside the Hospital, there are a lot of patients inside.");
 	Room* elevator = new Room("Elevator", 
 		"It sounds the typical elevator music. You aren't alone.");
-	Room* security_room = new Room("Security Room",
+	Room* security_room = new Room("Security",
 		"Like the movies, there are monitors for all the security cameras.");
-	Room* operations_room = new Room("Operations Room",
+	Room* operations_room = new Room("Operations",
 		"The room is still messy. Probably, "
 		"because it's taken place an operation few time ago.");
 	Room* infirmary = new Room("Infirmary",
@@ -35,17 +35,17 @@ World::World() {
 
 	// Create Exits
 	Exit* ex_garden_hall = new Exit(
-		"garden", "hall", "Principal entrance", garden, hall);
+		"hall", "garden", "Principal entrance", garden, hall);
 	Exit* ex_hall_security = new Exit(
-		"hall", "security room", "Security Room", 
+		"security", "hall", "Security Room", 
 		hall, security_room);
 	Exit* ex_hall_elevator = new Exit(
-		"hall", "elevator", "Hall elevator", hall, elevator);
+		"elevator", "hall", "Hall elevator", hall, elevator);
 	Exit* ex_elevator_operations = new Exit(
-		"elevator", "operations room", "Floor 1: Operations Room",
+		"operations", "elevator", "Floor 1: Operations Room",
 		elevator, operations_room);
 	Exit* ex_elevator_infirmary = new Exit(
-		"elevator", "infirmary", "Floor 2: Infirmary", elevator, infirmary);
+		"infirmary", "elevator", "Floor 2: Infirmary", elevator, infirmary);
 	ex_elevator_infirmary->locked = true;
 
 	entities.push_back(ex_garden_hall);
@@ -70,6 +70,9 @@ World::World() {
 	entities.push_back(elevator_guard);
 
 	// Create Items
+	Item* bag = new Item(
+		"Bag", "Personal bag to store items", player);
+	bag->owned = true;
 	Item* letter = new Item(
 		"Letter", "Mission: You need to recover the virus "
 		"and escape from the hospital", garden);
@@ -84,6 +87,7 @@ World::World() {
 	Item* virus = new Item(
 		"Virus Sample", "The virus sample you're looking for", infirmary);
 
+	entities.push_back(bag);
 	entities.push_back(letter);
 	entities.push_back(key);
 	entities.push_back(scalpel);
@@ -94,7 +98,7 @@ World::World() {
 	// Create Player
 	string name_input = "";
 	cout << "What's your name?" << endl << "> ";
-	cin >> name_input;
+	getline(cin, name_input);
 	cout << "> ";
 	player = new Player(name_input.c_str(), "You're the secret agent!", garden);
 	player->health = 10;
@@ -145,7 +149,7 @@ bool World::ParseCommand(vector<string>& args) {
 			}
 			else if (Compare(args[0], "go"))
 			{
-				// TODO
+				player->Go(args);
 			}
 			else if (Compare(args[0], "take"))
 			{
@@ -174,6 +178,16 @@ bool World::ParseCommand(vector<string>& args) {
 			else if (Compare(args[0], "loot"))
 			{
 				// TODO
+			}
+			else
+				parsed = false;
+			break;
+		}
+		case 3:
+		{
+			if (Compare(args[0], "go"))
+			{
+				player->Go(args);
 			}
 			else
 				parsed = false;

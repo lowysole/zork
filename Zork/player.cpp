@@ -2,6 +2,7 @@
 #include "room.h"
 #include "creature.h"
 #include "item.h"
+#include "exit.h"
 
 
 //Constructor
@@ -57,3 +58,33 @@ void Player::Look(const vector<string>& args) {
 	}
 
 }
+
+bool Player::Go(const vector<string>& args)
+{
+	// Get Room from Player (Creature)
+	Room* room = GetCurrentRoom();
+	// Check Exit from Room
+	Exit* ex = room->GetExit(args[1]);
+	if (ex == NULL) {
+		cout << "No direction found." << endl;
+		return false;
+	}
+	else if (ex->locked) {
+		cout << "The door is locked. You need a pass." << endl;
+		return false;
+	}
+	else if (ex->blocked) {
+		cout << "The door is blocked for the enemies. "
+			"You need to kill them." << endl;
+		return false;
+	}
+	cout << "You've entered to " << ex->GetNameDestination(room) << '.' << endl;
+
+	// Setting new Parent Room
+	SetNewParent(ex->GetRoomDestination(room));
+
+	//Display info from current Room
+	parent->Look();
+	return true;
+}
+

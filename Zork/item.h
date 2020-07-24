@@ -21,6 +21,7 @@ public:
 
 	virtual void Look();
 
+	bool owned;
 	int min_value;
 	int max_value;
 	ItemType item_type;

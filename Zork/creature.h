@@ -17,6 +17,7 @@ public:
 	~Creature();
 
 	virtual void Look();
+	Room* GetCurrentRoom();
 
 	CreatureType creature_type;
 	Room* location;

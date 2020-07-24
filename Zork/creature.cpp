@@ -28,3 +28,7 @@ void Creature::Look()
 		}
 	}
 }
+
+Room* Creature::GetCurrentRoom() {
+	return (Room*) parent;
+}

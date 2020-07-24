@@ -21,4 +21,12 @@ void Entity::Look()
 	cout << description << "\n";
 }
 
+void Entity::SetNewParent(Entity* new_parent) {
+	if (parent != NULL && new_parent != NULL) {
+		parent->container.remove(this);
+		parent = new_parent;
+		parent->container.push_back(this);
+	}
+}
+
 

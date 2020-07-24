@@ -12,7 +12,7 @@ public:
 		Room* origin, Room* destination);
 	~Exit();
 
-	const string& GetRoomName(const Room* room);
+	const string& GetNameDestination(const Room* room);
 	Room* GetRoomDestination(const Room* room);
 
 	bool locked;

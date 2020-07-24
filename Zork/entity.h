@@ -23,6 +23,7 @@ public:
 	~Entity();
 
 	void Look();
+	void SetNewParent(Entity* new_parent);
 
 	EntityType entity_type;
 	string name;

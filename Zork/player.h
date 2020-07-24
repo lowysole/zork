@@ -15,7 +15,7 @@ public:
 	~Player();
 
 	void Look(const vector<string>& args);
-	void Go(const vector<string>& args);
+	bool Go(const vector<string>& args);
 
 	int health;
 

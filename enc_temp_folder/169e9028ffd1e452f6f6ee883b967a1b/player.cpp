@@ -383,3 +383,7 @@ bool Player::Inspect(const vector<string>& args) {
 	}
 
 }
+
+void Player::InspectObject(Item* item) {
+
+}

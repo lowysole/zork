@@ -40,8 +40,9 @@ World::World() {
 	cout << "What's your name?" << endl << "> ";
 	getline(cin, name_input);
 	cout << "> ";
-	player = new Player(name_input.c_str(), "You're the secret agent!", garden);
-	player->hp = 10;
+	player = new Player(name_input.c_str(), "You're the secret agent!", security_room);
+	player->hp = 8;
+	player->attack = 8;
 
 	entities.push_back(player);
 
@@ -68,15 +69,16 @@ World::World() {
 
 	// Create NPC
 	Npc* security_guard = new Npc(
-		"Security Guard ", "It's the Security guard from the hospital",
+		"Guard", "It's the Security guard from the hospital",
 		security_room);
-	security_guard->hp = 10;
 	Npc* elevator_guard = new Npc(
 		"Worker", "It's the guard from the elevator",
 		elevator);
 
 	security_guard->hp = 10;
-	elevator_guard->hp = 20;
+	security_guard->attack = 10;
+	elevator_guard->hp = 5;
+	elevator_guard->attack = 5;
 
 	entities.push_back(security_guard);
 	entities.push_back(elevator_guard);
@@ -94,12 +96,11 @@ World::World() {
 		"Scalpel", "Scalpel from the last operation",
 		operations_room, WEAPON);
 	scalpel->atribute = 5;
-	// TODO change parent to elevator_guard
 	Item* armour = new Item(
-		"Protection", "Protection from the guard", garden, ARMOUR);
+		"Protection", "Protection from the guard", elevator_guard, ARMOUR);
 	armour->atribute = 5;
 	Item* virus = new Item(
-		"Virus Sample", "The virus sample you're looking for", infirmary);
+		"Virus", "The virus sample you're looking for", infirmary);
 
 	entities.push_back(bag);
 	entities.push_back(letter);
@@ -173,17 +174,13 @@ bool World::ParseCommand(vector<string>& args) {
 			{
 				player->Unequip(args);
 			}
-			else if (Compare(args[0], "examine"))
+			else if (Compare(args[0], "inspect"))
 			{
-				// TODO
+				player->Inspect(args);
 			}
 			else if (Compare(args[0], "attack"))
 			{
-				// TODO
-			}
-			else if (Compare(args[0], "loot"))
-			{
-				// TODO
+				player->Attack(args);
 			}
 			else
 				parsed = false;
@@ -193,12 +190,14 @@ bool World::ParseCommand(vector<string>& args) {
 		{
 			if (Compare(args[0], "unlock"))
 			{
-			// TODO
+				// TODO: Unlock
 			}
-			else if (Compare(args[0], "pick")) {
+			else if (Compare(args[0], "pick"))
+			{
 				player->Pick(args);
 			}
-			else if (Compare(args[0], "drop")) {
+			else if (Compare(args[0], "drop"))
+			{
 				player->Drop(args);
 			}
 			else if (Compare(args[0], "equip"))

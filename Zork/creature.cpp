@@ -50,3 +50,14 @@ void Creature::Stats() {
 
 
 }
+void Creature::KillNPC(Npc* npc) {
+	npc->hp = 0;
+
+	// Drop enemy items to the current Room
+	Room* room = this->GetCurrentRoom();
+	list<Entity*> items = npc->FindAll(ITEM);
+	for (list<Entity*>::iterator it = items.begin(); it != items.end(); ++it) {
+		(*it)->SetNewParent((Entity*)room);
+		cout << "Enemy item '" << (*it)->name << "' dropped into the room." << endl;
+	}
+}

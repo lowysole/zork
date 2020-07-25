@@ -19,6 +19,7 @@ int main()
 
 	string description = "Type 'help' to show all the commands or 'quit' to close the game";
 
+	// TODO: Complete help
 	string help = "List of commands:";
 	cout << description << endl;
 	cout << "------------------" << endl;

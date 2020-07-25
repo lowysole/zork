@@ -34,7 +34,7 @@ list<Entity*> Entity::FindAll(EntityType type)
 {
 	list<Entity*> list_items;
 	for (list<Entity*>::const_iterator it = container.begin(); it != container.cend(); ++it) {
-		if ((*it)->entity_type == ITEM) {
+		if ((*it)->entity_type == type) {
 			list_items.push_back(*it);
 		}
 	}
@@ -44,7 +44,7 @@ list<Entity*> Entity::FindAll(EntityType type)
 Entity* Entity::Find(const string& name, EntityType type) {
 	list<Entity*> list_items;
 	for (list<Entity*>::const_iterator it = container.begin(); it != container.cend(); ++it) {
-		if ((*it)->entity_type == ITEM) {
+		if ((*it)->entity_type == type) {
 			if (Compare((*it)->name, name)) {
 				return (*it);
 			}

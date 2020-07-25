@@ -11,6 +11,7 @@ enum CreatureType {
 
 class Room;
 class Item;
+class Npc;
 
 class Creature: public Entity
 {
@@ -21,6 +22,7 @@ public:
 	virtual void Look();
 	Room* GetCurrentRoom();
 	void Stats();
+	void KillNPC(Npc* npc);
 
 	CreatureType creature_type;
 	Room* location;

@@ -10,7 +10,6 @@ public:
 	~Npc();
 	
 	bool isAlive();
-	int health;
 };
 
 #endif // __Npc__

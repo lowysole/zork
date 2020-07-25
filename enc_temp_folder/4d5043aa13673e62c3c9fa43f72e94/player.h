@@ -28,6 +28,7 @@ public:
 	bool UnequipObject(Item* item);
 	bool Attack(const vector<string>& args);
 	bool Inspect(const vector<string>& args);
+	void InspectObject(Item* item);
 
 	size_t max_inventory; // + 1 (bag)
 };

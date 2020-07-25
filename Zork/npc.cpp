@@ -4,7 +4,6 @@
 Npc::Npc(const char* name, const char* description, Room* location) :
 	Creature(name, description, location) {
 	this->creature_type = NPC;
-	this->health = 10;
 
 }
 
@@ -14,7 +13,7 @@ Npc::~Npc() {
 }
 
 bool Npc::isAlive() {
-	if (this->health > 0) {
+	if (this->hp > 0) {
 		return true;
 	}
 	return false;

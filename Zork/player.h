@@ -20,6 +20,8 @@ public:
 	bool PickFromRoom(const vector<string>& args, bool to_bag = false);
 	void Inventory();
 	void PrintObject(const Item *item);
+	bool Drop(const vector<string>& args);
+
 
 	size_t max_inventory; // + 1 (bag)
 };

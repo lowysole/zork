@@ -161,7 +161,7 @@ bool World::ParseCommand(vector<string>& args) {
 			}
 			else if (Compare(args[0], "drop"))
 			{
-				// TODO
+				player->Drop(args);
 			}
 			else if (Compare(args[0], "equip"))
 			{
@@ -195,6 +195,9 @@ bool World::ParseCommand(vector<string>& args) {
 			}
 			else if (Compare(args[0], "pick")) {
 				player->Pick(args);
+			}
+			else if (Compare(args[0], "drop")) {
+				player->Drop(args);
 			}
 			else
 			parsed = false;

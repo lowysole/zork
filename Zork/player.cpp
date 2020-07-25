@@ -91,7 +91,7 @@ bool Player::Go(const vector<string>& args)
 
 bool Player::Pick(const vector<string>& args) {
 
-	if (args.size() == 2) {
+	if (args.size() == 2) { // To inventory (pick <object>)
 		// Check if the inventory is full
 		list<Entity*>  list_items = FindAll(ITEM);
 		if (list_items.size() >= max_inventory) {
@@ -101,8 +101,7 @@ bool Player::Pick(const vector<string>& args) {
 		return PickFromRoom(args, false);
 
 	}
-	else if (args.size() == 4) {
-		// Otherwise, we need to put the object into the bag
+	else if (args.size() == 4) { // To bag (pick <object> to bag)
 		if (!Compare(args[3], "bag")) {
 			cout << "You cannot put this object inside a " << args[3] << endl;
 			return false;
@@ -115,6 +114,7 @@ bool Player::Pick(const vector<string>& args) {
 			return false;
 		}
 	} 
+	return false;
 }
 bool Player::PickFromRoom(const vector<string>& args, bool to_bag) {
 	Entity* item = ((Room*)parent)->Find(args[1], ITEM);
@@ -175,5 +175,44 @@ void Player::PrintObject(const Item *item) {
 	}
 	else
 		cout << "- " << item->name << " (Object)" << endl;
+}
+
+bool Player::Drop(const vector<string>& args) {
+	if (args.size() == 2) { //From inventory
+		Entity* item = Find(args[1], ITEM);
+		if (item == NULL) {
+			cout << "You don't have this item in the inventory. "
+				"Try to find it int he bag" << endl;
+			return false;
+		}
+		else {
+			Room* current_room = GetCurrentRoom();
+			item->SetNewParent(current_room);
+			cout << "Item " << item->name << " dropped to "
+				<< current_room->name << endl;
+			return true;
+		}
+	}
+	else if (args.size() == 4 ) { //From bag
+		Entity* item = Find(args[3], ITEM);
+		if (item == NULL) {
+			cout << "You cannot drop this item from " << args[3] << endl;
+			return false;
+		}
+		Entity* bag_item = item->Find(args[1], ITEM);
+		if (bag_item == NULL) {
+			cout << "You don't have this item inside " << args[3] << endl;
+			return false;
+		}
+		else {
+			Room* current_room = GetCurrentRoom();
+			bag_item->SetNewParent(current_room);
+			cout << "Item " << bag_item->name << " dropped to "
+				<< current_room->name << endl;
+			return true;
+		}
+	}
+	return false;
+
 }
 

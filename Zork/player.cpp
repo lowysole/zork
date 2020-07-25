@@ -376,10 +376,12 @@ bool Player::Inspect(const vector<string>& args) {
 		}
 		else {
 			((Entity*)bag_item)->Look();
+			return true;
 		}
 	}
 	else {
 		((Entity*)item)->Look();
+		return true;
 	}
 
 }

@@ -9,5 +9,7 @@ using namespace std;
 
 bool Compare(const string& str1, const string& str2);
 void ParseInput(const string& line, vector<string>& arguments);
+string GetHelp();
+string GetStory();
 
 #endif //__Utils__

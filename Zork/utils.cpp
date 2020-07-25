@@ -29,3 +29,36 @@ void ParseInput(const string& line, vector<string>& arguments)
 		arguments.push_back(string(begin, str));
 	} while (0 != *str++);
 }
+
+string GetHelp() {
+	return (
+		"List of commands : \n"
+		"----------------------\n"
+		"> look --> General look\n"
+		"> look <entity> --> Look the object <entity>"
+		"(Ex: look garden --> Look all the entities from the Garden)\n"
+		"> stats --> Show the stats from the player \n"
+		"> inventory --> Show inventory from the player \n"
+		"> go <somewhere> --> Go to the indicated room \n"
+		"> pick <item> --> Take the item and put it to the inventory\n"
+		"> pick <item> to <place> --> Take the item and put it to the place "
+		"(Ex: pick letter to bag)\n"
+		"> drop <item> --> Drop item to current Room\n"
+		"> drop <item> from <place> --> Drop item from place to current Room "
+		"(Ex: drop letter from bag)\n"
+		"> equip <item> --> Equip item that is in the inventory\n"
+		"> equip <item> from <place> --> Equip item from place that"
+		"is in that place (Ex: equip sword from bag)\n"
+		"> unequip <item> --> Unequip item equipped before\n"
+		"> inspect <item> --> Show info from item picked\n"
+		"> attack <creature> --> Attack creature from the room\n"
+		"> unlock <room> with <item> --> Unlock the room with the"
+		"item from the inventory\n"
+		"----------------------\n");
+}
+
+string GetStory() {
+	return("We are on 2020. This hospital has a virus that can cause global "
+		"chaos. You're a secret agent. Your mission?\nTo recover that virus "
+		"before it is too late. Take it back. Good Luck.");
+}

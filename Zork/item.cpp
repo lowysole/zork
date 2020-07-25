@@ -4,9 +4,8 @@
 Item::Item(const char* name, const char* description, Entity* parent, ItemType item_type):
 Entity(name, description, parent) {
 	this->item_type = item_type;
-	owned = false;
 	entity_type = ITEM;
-	min_value = max_value = 0;
+	atribute = 0;
 }
 
 //Destructor
@@ -20,7 +19,6 @@ void Item::Look()
 	cout << description << endl;
 
 	list<Entity*> stuff;
-	//FindAll(ITEM, stuff);
 
 	if (stuff.size() > 0)
 	{

@@ -182,11 +182,16 @@ bool Player::Drop(const vector<string>& args) {
 		Entity* item = Find(args[1], ITEM);
 		if (item == NULL) {
 			cout << "You don't have this item in the inventory. "
-				"Try to find it int he bag" << endl;
+				"Try to find it in the bag" << endl;
 			return false;
 		}
 		else {
 			Room* current_room = GetCurrentRoom();
+			// Unequip if item was equipped before drop
+			if (((Item*)item)->item_type == WEAPON ||
+				((Item*)item)->item_type == ARMOUR) {
+				if (this->UnequipObject((Item*)item)) {};
+			}
 			item->SetNewParent(current_room);
 			cout << "Item " << item->name << " dropped to "
 				<< current_room->name << endl;
@@ -206,6 +211,11 @@ bool Player::Drop(const vector<string>& args) {
 		}
 		else {
 			Room* current_room = GetCurrentRoom();
+			// Unequip if item was equipped before drop
+			if (((Item*)bag_item)->item_type == WEAPON ||
+				((Item*)bag_item)->item_type == ARMOUR) {
+				if (this->UnequipObject((Item*)bag_item)) {};
+			}
 			bag_item->SetNewParent(current_room);
 			cout << "Item " << bag_item->name << " dropped to "
 				<< current_room->name << endl;
@@ -216,3 +226,102 @@ bool Player::Drop(const vector<string>& args) {
 
 }
 
+bool Player::Equip(const vector <string>& args) {
+	if (args.size() == 2) { //From inventory
+		Item* item = (Item*)Find(args[1], ITEM);
+		if (item == NULL) {
+			cout << "You don't have this item in the inventory. "
+				"Try to find it in the bag." << endl;
+			return false;
+		}
+		else {
+			return EquipObject(item);
+		}
+	}
+	else if (args.size() == 4) { //From bag
+		Entity* item = Find(args[3], ITEM);
+		if (item == NULL) {
+			cout << "You cannot equip this item from " << args[3] << endl;
+			return false;
+		}
+		Item* bag_item = (Item*)item->Find(args[1], ITEM);
+		if (bag_item == NULL) {
+			cout << "You don't have this item inside " << args[3] << endl;
+			return false;
+		}
+		else {
+			return EquipObject(bag_item);
+		}
+	}
+	return false;
+}
+
+bool Player::EquipObject(Item* item) {
+
+	if (item->item_type == WEAPON) {
+		this->weapon = item;
+		this->attack += item->atribute;
+		cout << "Item " << item->name << " equiped. "
+			"Attack increased " << item->atribute << " points." << endl;
+		return true;
+	}
+	else if (item->item_type == ARMOUR) {
+		this->armour = item;
+		this->hp += item->atribute;
+
+		cout << "Item " << item->name << " equiped. "
+			"Defense increased " << item->atribute << " points." << endl;
+		return true;
+	}
+	else {
+		cout << "You can only equip weapons or armour. " << endl;
+		return false;
+	}
+}
+
+bool Player::Unequip(const vector <string>& args) {
+	//Look inventory
+	Item* item = (Item*)Find(args[1], ITEM);
+	if (item == NULL) {
+		// Find inside bag
+		Item* item = (Item*)Find("bag", ITEM);
+		if (item == NULL) {
+			cout << "Bag has been dropped." << endl;
+			return false;
+		}
+		Item* bag_item = (Item*)item->Find(args[1], ITEM);
+		if (bag_item == NULL) {
+			cout << "You don't have this item in the inventory." << endl;
+			return false;
+		}
+		else {
+			return UnequipObject(bag_item);
+		}
+	}
+	else {
+		return UnequipObject(item);
+	}
+
+}
+
+bool Player::UnequipObject(Item* item) {
+	if (this->armour == item) {
+		this->armour = NULL;
+		this->hp -= item->atribute;
+
+		cout << "Item " << item->name << " unequiped. "
+			"Defense decreased " << item->atribute << " points." << endl;
+		return true;
+	}
+	else if (this->weapon == item) {
+		this->weapon = NULL;
+		this->attack -= item->atribute;
+		cout << "Item " << item->name << " unequiped. "
+			"Attack decreased " << item->atribute << " points." << endl;
+		return true;
+	}
+	else {
+		cout << "You cannot unequip this item." << endl;
+		return false;
+	}
+}

@@ -9,7 +9,8 @@ Entity(name, description, (Entity*)location) {
 	this->location = location;
 	hp = 10;
 	attack = 0;
-	armour = weapon = NULL;
+	armour = NULL;
+	weapon = NULL;
 }
 
 //Destructor
@@ -43,7 +44,7 @@ void Creature::Stats() {
 	cout << "HP: " << hp << endl;
 	cout << "Armour: " <<
 		((armour) ? armour->name : "no armour equiped") << endl;
-	cout << "Attack: " << hp << endl;
+	cout << "Attack: " << attack << endl;
 	cout << "Weapon: " <<
 		((weapon) ? weapon->name : "no weapon equiped") << endl;
 

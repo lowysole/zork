@@ -21,7 +21,10 @@ public:
 	void Inventory();
 	void PrintObject(const Item *item);
 	bool Drop(const vector<string>& args);
-
+	bool Equip(const vector <string>& args);
+	bool EquipObject(Item* item);
+	bool Unequip(const vector <string>& args);
+	bool UnequipObject(Item* item);
 
 	size_t max_inventory; // + 1 (bag)
 };

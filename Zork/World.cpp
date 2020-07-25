@@ -84,7 +84,6 @@ World::World() {
 	// Create Items
 	Item* bag = new Item(
 		"Bag", "Personal bag to store items", player, BAG);
-	bag->owned = true;
 	Item* letter = new Item(
 		"Letter", "Mission: You need to recover the virus "
 		"and escape from the hospital", garden);
@@ -94,8 +93,11 @@ World::World() {
 	Item* scalpel = new Item(
 		"Scalpel", "Scalpel from the last operation",
 		operations_room, WEAPON);
+	scalpel->atribute = 5;
+	// TODO change parent to elevator_guard
 	Item* armour = new Item(
-		"Protection", "Protection from the guard", elevator_guard, ARMOUR);
+		"Protection", "Protection from the guard", garden, ARMOUR);
+	armour->atribute = 5;
 	Item* virus = new Item(
 		"Virus Sample", "The virus sample you're looking for", infirmary);
 
@@ -165,11 +167,11 @@ bool World::ParseCommand(vector<string>& args) {
 			}
 			else if (Compare(args[0], "equip"))
 			{
-				// TODO
+				player->Equip(args);
 			}
 			else if (Compare(args[0], "unequip"))
 			{
-				// TODO
+				player->Unequip(args);
 			}
 			else if (Compare(args[0], "examine"))
 			{
@@ -198,6 +200,10 @@ bool World::ParseCommand(vector<string>& args) {
 			}
 			else if (Compare(args[0], "drop")) {
 				player->Drop(args);
+			}
+			else if (Compare(args[0], "equip"))
+			{
+				player->Equip(args);
 			}
 			else
 			parsed = false;

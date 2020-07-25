@@ -1,6 +1,7 @@
 #ifndef __Creature__
 #define __Creature__
 
+#include <vector>
 #include "entity.h"
 
 enum CreatureType {

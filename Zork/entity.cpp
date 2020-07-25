@@ -50,6 +50,7 @@ Entity* Entity::Find(const string& name, EntityType type) {
 			}
 		}
 	}
+	return NULL;
 }
 
 

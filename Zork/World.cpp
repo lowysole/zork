@@ -135,9 +135,9 @@ bool World::ParseCommand(vector<string>& args) {
 			{
 				player->Stats();
 			}
-			else if (Compare(args[0], "bag"))
+			else if (Compare(args[0], "inventory"))
 			{
-				// TODO
+				player->Inventory();
 			}
 			else
 			{

@@ -9,7 +9,7 @@
 Player::Player(const char* name, const char* description, Room* location) :
 	Creature(name, description, location) {
 	creature_type = PLAYER;
-	max_inventory = 1;
+	max_inventory = 2;
 }
 
 //Destructor
@@ -98,7 +98,7 @@ bool Player::Pick(const vector<string>& args) {
 			cout << "Full inventory. Put the object inside the bag." << endl;
 			return false;
 		}
-		return PickFromRoom(args);
+		return PickFromRoom(args, false);
 
 	}
 	else if (args.size() == 4) {
@@ -108,7 +108,7 @@ bool Player::Pick(const vector<string>& args) {
 			return false;
 		}
 		else {
-			if (PickFromRoom(args)) {
+			if (PickFromRoom(args, true)) {
 				cout << "It's inside de bag" << endl;
 				return true;
 			}
@@ -116,7 +116,7 @@ bool Player::Pick(const vector<string>& args) {
 		}
 	} 
 }
-bool Player::PickFromRoom(const vector<string>& args) {
+bool Player::PickFromRoom(const vector<string>& args, bool to_bag) {
 	Entity* item = ((Room*)parent)->Find(args[1], ITEM);
 
 	if (item == NULL)
@@ -126,9 +126,54 @@ bool Player::PickFromRoom(const vector<string>& args) {
 	}
 
 	cout << "You take " << item->name << "." << endl;
-	Entity* bag = Find("bag", ITEM);
-	item->SetNewParent((Item*)bag);
+	if (to_bag) {
+		Entity* bag = Find("bag", ITEM);
+		item->SetNewParent((Item*)bag);
+	}
+	else
+		item->SetNewParent(this);
 	
 	return true;
+}
+
+void Player::Inventory() {
+
+	list<Entity*> list_items = FindAll(ITEM);
+	Entity* bag = NULL;
+
+	cout << " Inventory:" << endl;
+	cout << "-----------------------" << endl;
+	cout << "Max items: " << max_inventory << endl;
+	for (list<Entity*>::iterator it = list_items.begin();
+		it != list_items.end(); ++it) {
+		Item* item = (Item*)*it;
+		if (item->item_type == BAG) {
+			bag = *it;
+		}
+		else {
+			PrintObject(item);
+		}
+	}
+	if (bag != NULL) {
+		cout << "- " << "Bag." << endl;
+		cout << "> Items inside bag:" << endl;
+		list<Entity*> list_items = ((Item*)bag)->FindAll(ITEM);
+		for (list<Entity*>::iterator it = list_items.begin();
+			it != list_items.end(); ++it) {
+			Item* item = (Item*)*it;
+			PrintObject(item);
+		}
+	}
+}
+
+void Player::PrintObject(const Item *item) {
+	if (item->item_type == WEAPON) {
+		cout << "- " << item->name << " (Weapon)" << endl;
+	}
+	else if (item->item_type == ARMOUR) {
+		cout << "- " << item->name << " (Armour)" << endl;
+	}
+	else
+		cout << "- " << item->name << " (Object)" << endl;
 }
 

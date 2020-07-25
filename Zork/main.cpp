@@ -38,7 +38,7 @@ int main()
 			break;
 
 		else if (my_world.ParseCommand(args) == false)
-			cout << "Sorry, I do not understand your command.\n";
+			cout << "Sorry, I do not understand your command." << endl;
 
 		if (args.size() > 0)
 		{

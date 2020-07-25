@@ -10,7 +10,8 @@ using namespace std;
 enum ItemType {
 	WEAPON,
 	ARMOUR,
-	OBJECT
+	OBJECT,
+	BAG
 };
 
 class Item : public Entity

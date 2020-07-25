@@ -9,7 +9,7 @@
 Player::Player(const char* name, const char* description, Room* location) :
 	Creature(name, description, location) {
 	creature_type = PLAYER;
-	this->health = 10;
+	max_inventory = 1;
 }
 
 //Destructor
@@ -78,13 +78,57 @@ bool Player::Go(const vector<string>& args)
 			"You need to kill them." << endl;
 		return false;
 	}
-	cout << "You've entered to " << ex->GetNameDestination(room) << '.' << endl;
+	cout << "You've entered to " << ex->GetNameDestination(room) <<
+		'.' << endl;
 
 	// Setting new Parent Room
 	SetNewParent(ex->GetRoomDestination(room));
 
 	//Display info from current Room
 	parent->Look();
+	return true;
+}
+
+bool Player::Pick(const vector<string>& args) {
+
+	if (args.size() == 2) {
+		// Check if the inventory is full
+		list<Entity*>  list_items = FindAll(ITEM);
+		if (list_items.size() >= max_inventory) {
+			cout << "Full inventory. Put the object inside the bag." << endl;
+			return false;
+		}
+		return PickFromRoom(args);
+
+	}
+	else if (args.size() == 4) {
+		// Otherwise, we need to put the object into the bag
+		if (!Compare(args[3], "bag")) {
+			cout << "You cannot put this object inside a " << args[3] << endl;
+			return false;
+		}
+		else {
+			if (PickFromRoom(args)) {
+				cout << "It's inside de bag" << endl;
+				return true;
+			}
+			return false;
+		}
+	} 
+}
+bool Player::PickFromRoom(const vector<string>& args) {
+	Entity* item = ((Room*)parent)->Find(args[1], ITEM);
+
+	if (item == NULL)
+	{
+		cout << "This item desn't exist." << endl;
+		return false;
+	}
+
+	cout << "You take " << item->name << "." << endl;
+	Entity* bag = Find("bag", ITEM);
+	item->SetNewParent((Item*)bag);
+	
 	return true;
 }
 

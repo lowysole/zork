@@ -16,9 +16,10 @@ public:
 
 	void Look(const vector<string>& args);
 	bool Go(const vector<string>& args);
+	bool Pick(const vector<string>& args);
+	bool PickFromRoom(const vector<string>& args);
 
-	int health;
-
+	size_t max_inventory; // + 1 (bag)
 };
 
 #endif // __Player__

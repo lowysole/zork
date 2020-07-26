@@ -12,7 +12,7 @@ We are in 2020. This hospital has a virus (corona-shaped) that can cause global 
 Game for Windows(x86)
 
 Steps:
-- Go to last release: https://github.com/lowysole/zork/releases/tag/v1.0.1
+- Go to latest release: https://github.com/lowysole/zork/releases/tag/v1.0.1
 - Download https://github.com/lowysole/zork/files/4978210/Zork.zip
 - Uncompress it
 - Execute it

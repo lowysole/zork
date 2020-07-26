@@ -19,7 +19,6 @@ int main()
 
 	string description = "Type 'help' to show all the commands or 'quit' to close the game";
 
-	// TODO: Complete help
 	string help = GetHelp();
 	cout << description << endl;
 	cout << "------------------" << endl;
@@ -44,6 +43,14 @@ int main()
 		else if (my_world.ParseCommand(args) == false)
 			cout << "Sorry, I do not understand your command." << endl;
 
+		else if (my_world.CheckVictory()) {
+			cout << "------------------" << endl;
+			cout << "Mission completed. " << endl;
+			cout << "You've save the virtual humanity. "
+				"Please, come now to save the real world." << endl;
+			break;
+		}
+
 		if (args.size() > 0)
 		{
 			args.clear();
@@ -52,6 +59,8 @@ int main()
 		}
 	}
 
-	cout << "\nThanks for playing, Bye!" << endl;
+	cout << endl << "\nThanks for playing, Bye!" << endl;
+	cout << "------------------" << endl;
+	cout << "Credits: @lowysole" << endl;
 	return 0;
 }

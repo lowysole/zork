@@ -58,7 +58,7 @@ string GetHelp() {
 }
 
 string GetStory() {
-	return("We are on 2020. This hospital has a virus that can cause global "
+	return("We are on 2020. This hospital has a virus (corona-shaped) that can cause global "
 		"chaos. You're a secret agent. Your mission?\nTo recover that virus "
 		"before it is too late. Take it back. Good Luck.");
 }

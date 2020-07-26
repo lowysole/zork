@@ -22,6 +22,7 @@ public :
 	~World();
 
 	bool ParseCommand(vector<string>& args);
+	bool CheckVictory();
 
 };
 

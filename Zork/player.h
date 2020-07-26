@@ -29,6 +29,7 @@ public:
 	bool Attack(const vector<string>& args);
 	bool Inspect(const vector<string>& args);
 	bool Unlock(const vector<string>& args);
+	bool CheckVictory();
 
 	size_t max_inventory; // + 1 (bag)
 };

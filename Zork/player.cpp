@@ -114,7 +114,7 @@ bool Player::Pick(const vector<string>& args) {
 			}
 			return false;
 		}
-	} 
+	}
 	return false;
 }
 bool Player::PickFromRoom(const vector<string>& args, bool to_bag) {
@@ -133,7 +133,7 @@ bool Player::PickFromRoom(const vector<string>& args, bool to_bag) {
 	}
 	else
 		item->SetNewParent(this);
-	
+
 	return true;
 }
 
@@ -199,7 +199,7 @@ bool Player::Drop(const vector<string>& args) {
 			return true;
 		}
 	}
-	else if (args.size() == 4 ) { //From bag
+	else if (args.size() == 4) { //From bag
 		Entity* item = Find(args[3], ITEM);
 		if (item == NULL) {
 			cout << "You cannot drop this item from " << args[3] << endl;
@@ -282,7 +282,7 @@ bool Player::EquipObject(Item* item) {
 
 bool Player::Unequip(const vector <string>& args) {
 	//Look inventory
-	Item* item = (Item*) FindInverntoryItem(args[1]);
+	Item* item = (Item*)FindInverntoryItem(args[1]);
 	if (item == NULL) { return false; }
 	return UnequipObject(item);
 }
@@ -360,13 +360,34 @@ bool Player::Unlock(const vector<string>& args) {
 		cout << "This door isn't locked." << endl;
 		return false;
 	}
-	Item* item = (Item*) FindInverntoryItem(args[3]);
+	Item* item = (Item*)FindInverntoryItem(args[3]);
 	if (item == NULL) { return false; }
-	if (!Compare(item->name,"Card")) {
+	if (!Compare(item->name, "Card")) {
 		cout << "You cannot unlock the door with this object." << endl;
 		return false;
 	}
 	exit->locked = false;
 	cout << "Room " << exit->name << " unlocked." << endl;
 	return true;
+}
+
+bool Player::CheckVictory() {
+	// Check that you have the virus and you're in the garden
+	Room* room = GetCurrentRoom();
+	if (!Compare(room->name, "Garden")) { return false; }
+	Item* item = (Item*)Find("virus", ITEM);
+	if (item == NULL) {
+		Item* item = (Item*)Find("bag", ITEM);
+		if (item == NULL) {
+			return false;
+		}
+		Item* bag_item = (Item*)item->Find("virus", ITEM);
+		if (bag_item == NULL) {
+			return false;
+		}
+		else
+			return true;
+	}
+	else
+		return true;
 }

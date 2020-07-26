@@ -62,5 +62,7 @@ int main()
 	cout << endl << "\nThanks for playing, Bye!" << endl;
 	cout << "------------------" << endl;
 	cout << "Credits: github@lowysole" << endl;
+
+	getline(cin, player_input);
 	return 0;
 }

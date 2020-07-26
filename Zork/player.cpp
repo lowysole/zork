@@ -103,13 +103,19 @@ bool Player::Pick(const vector<string>& args) {
 
 	}
 	else if (args.size() == 4) { // To bag (pick <object> to bag)
+		if (Compare(args[1], "bag") && Compare(args[3], "bag")) {
+			// It prevents from 'pick bag to bag'
+			cout << "Bag bug inception" << endl;
+			return false;
+		}
+
 		if (!Compare(args[3], "bag")) {
 			cout << "You cannot put this object inside a " << args[3] << endl;
 			return false;
 		}
 		else {
 			if (PickFromRoom(args, true)) {
-				cout << "It's inside de bag" << endl;
+				cout << "It's inside the bag" << endl;
 				return true;
 			}
 			return false;
@@ -119,21 +125,23 @@ bool Player::Pick(const vector<string>& args) {
 }
 bool Player::PickFromRoom(const vector<string>& args, bool to_bag) {
 	Entity* item = ((Room*)parent)->Find(args[1], ITEM);
-
 	if (item == NULL)
 	{
 		cout << "This item doesn't exist." << endl;
 		return false;
 	}
-
-	cout << "You take " << item->name << "." << endl;
 	if (to_bag) {
 		Entity* bag = Find("bag", ITEM);
+		if (bag == NULL && !Compare(item->name, "bag")) {
+			cout << "You've dropped the bag before" << endl;
+			return false;
+		}
 		item->SetNewParent((Item*)bag);
 	}
 	else
 		item->SetNewParent(this);
 
+	cout << "You take " << item->name << "." << endl;
 	return true;
 }
 

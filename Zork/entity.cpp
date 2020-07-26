@@ -43,7 +43,7 @@ list<Entity*> Entity::FindAll(EntityType type)
 	return list_items;
 }
 
-// Find object of type
+// Find object of type with name
 Entity* Entity::Find(const string& name, EntityType type) {
 	list<Entity*> list_items;
 	for (list<Entity*>::const_iterator it = container.begin(); it != container.cend(); ++it) {
@@ -75,6 +75,6 @@ Entity* Entity::FindInverntoryItem(const string& name) {
 		else
 			return bag_item;
 	}
-	else 
+	else
 		return item;
 }

@@ -7,7 +7,7 @@
 
 //Constructor
 Room::Room(const char* name, const char* description) :
-Entity(name, description, NULL)
+	Entity(name, description, NULL)
 {
 	this->entity_type = ROOM;
 }
@@ -18,13 +18,13 @@ Room::~Room() {
 }
 
 void Room::Look() {
-	
+
 	cout << name << endl;
 	cout << description << endl;
 
 	//List Exits
 	for (list<Entity*>::iterator it = container.begin();
-		it != container.end(); ++it) 
+		it != container.end(); ++it)
 	{
 		if ((*it)->entity_type == EXIT) {
 			Exit* ex = (Exit*)*it;
@@ -50,7 +50,7 @@ void Room::Look() {
 			Creature* creature = (Creature*)*it;
 			if (creature->creature_type == NPC) {
 				Npc* npc = (Npc*)creature;
-				cout << "There is someone here: " << creature->name ;
+				cout << "There is someone here: " << creature->name;
 				if (!npc->isAlive())
 					cout << "(dead)";
 				cout << endl;

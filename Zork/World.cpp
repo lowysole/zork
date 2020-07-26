@@ -13,11 +13,11 @@ World::World() {
 
 	// Create Rooms
 	Room* garden = new Room("Garden",
-		"You're outside, in the hospital garden. " 
+		"You're outside, in the hospital garden. "
 		"Tall trees stand around you.");
-	Room* hall = new Room("Hall", 
+	Room* hall = new Room("Hall",
 		"You're inside the Hospital, there are a lot of patients inside.");
-	Room* elevator = new Room("Elevator", 
+	Room* elevator = new Room("Elevator",
 		"It sounds the typical elevator music. You aren't alone.");
 	Room* security_room = new Room("Security",
 		"Like the movies, there are monitors for all the security cameras.");
@@ -49,7 +49,7 @@ World::World() {
 	Exit* ex_garden_hall = new Exit(
 		"hall", "garden", "Principal entrance", garden, hall);
 	Exit* ex_hall_security = new Exit(
-		"security", "hall", "Security Room", 
+		"security", "hall", "Security Room",
 		hall, security_room);
 	Exit* ex_hall_elevator = new Exit(
 		"elevator", "hall", "Hall elevator", hall, elevator);
@@ -124,91 +124,91 @@ World::~World() {
 bool World::ParseCommand(vector<string>& args) {
 	bool parsed = true;
 
-	switch (args.size()) 
+	switch (args.size())
 	{
 
-		case 1:
+	case 1: // commands without arguments
+	{
+		if (Compare(args[0], "look"))
 		{
-			if (Compare(args[0], "look")) 
-			{
-				player->Look(args);
-			}
-			else if(Compare(args[0], "stats"))
-			{
-				player->Stats();
-			}
-			else if (Compare(args[0], "inventory"))
-			{
-				player->Inventory();
-			}
-			else
-			{
-				parsed = false;
-			}
-			break;
+			player->Look(args);
 		}
-		case 2: // commands with one argument ------------------------------
+		else if (Compare(args[0], "stats"))
 		{
-			if (Compare(args[0], "look"))
-			{
-				player->Look(args);
-			}
-			else if (Compare(args[0], "go"))
-			{
-				player->Go(args);
-			}
-			else if (Compare(args[0], "pick"))
-			{
-				player->Pick(args);
-			}
-			else if (Compare(args[0], "drop"))
-			{
-				player->Drop(args);
-			}
-			else if (Compare(args[0], "equip"))
-			{
-				player->Equip(args);
-			}
-			else if (Compare(args[0], "unequip"))
-			{
-				player->Unequip(args);
-			}
-			else if (Compare(args[0], "inspect"))
-			{
-				player->Inspect(args);
-			}
-			else if (Compare(args[0], "attack"))
-			{
-				player->Attack(args);
-			}
-			else
-				parsed = false;
-			break;
+			player->Stats();
 		}
-		case 4:
+		else if (Compare(args[0], "inventory"))
 		{
-			if (Compare(args[0], "unlock"))
-			{
-				player->Unlock(args);
-			}
-			else if (Compare(args[0], "pick"))
-			{
-				player->Pick(args);
-			}
-			else if (Compare(args[0], "drop"))
-			{
-				player->Drop(args);
-			}
-			else if (Compare(args[0], "equip"))
-			{
-				player->Equip(args);
-			}
-			else
+			player->Inventory();
+		}
+		else
+		{
 			parsed = false;
-			break;
 		}
-		default:
+		break;
+	}
+	case 2: // commands with one argument 
+	{
+		if (Compare(args[0], "look"))
+		{
+			player->Look(args);
+		}
+		else if (Compare(args[0], "go"))
+		{
+			player->Go(args);
+		}
+		else if (Compare(args[0], "pick"))
+		{
+			player->Pick(args);
+		}
+		else if (Compare(args[0], "drop"))
+		{
+			player->Drop(args);
+		}
+		else if (Compare(args[0], "equip"))
+		{
+			player->Equip(args);
+		}
+		else if (Compare(args[0], "unequip"))
+		{
+			player->Unequip(args);
+		}
+		else if (Compare(args[0], "inspect"))
+		{
+			player->Inspect(args);
+		}
+		else if (Compare(args[0], "attack"))
+		{
+			player->Attack(args);
+		}
+		else
 			parsed = false;
+		break;
+	}
+	case 4: // commands with three arguments
+	{
+		if (Compare(args[0], "unlock"))
+		{
+			player->Unlock(args);
+		}
+		else if (Compare(args[0], "pick"))
+		{
+			player->Pick(args);
+		}
+		else if (Compare(args[0], "drop"))
+		{
+			player->Drop(args);
+		}
+		else if (Compare(args[0], "equip"))
+		{
+			player->Equip(args);
+		}
+		else
+			parsed = false;
+		break;
+	}
+	default:
+		parsed = false;
 	}
 	return parsed;
 }

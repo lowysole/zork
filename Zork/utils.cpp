@@ -9,12 +9,14 @@ bool compareChar(const char& c1, const char& c2)
 	return false;
 }
 
+// Compare two strings (case-insensitive)
 bool Compare(const string& str1, const string& str2)
 {
 	return ((str1.size() == str2.size()) &&
 		std::equal(str1.begin(), str1.end(), str2.begin(), &compareChar));
 }
 
+// Split input by ' '
 void ParseInput(const string& line, vector<string>& arguments)
 {
 	const char* str = line.c_str();

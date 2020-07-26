@@ -5,10 +5,10 @@
 
 class Room;
 
-class Exit: public Entity
+class Exit : public Entity
 {
 public:
-	Exit(const char* name, const char* opposite_name, const char* description, 
+	Exit(const char* name, const char* opposite_name, const char* description,
 		Room* origin, Room* destination);
 	~Exit();
 
@@ -20,7 +20,7 @@ public:
 	string opposite_name;
 	Room* destination;
 	Entity* key;
-	
+
 };
 
 #endif // __Exit__

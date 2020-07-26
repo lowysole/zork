@@ -62,7 +62,7 @@ void Player::Look(const vector<string>& args) {
 
 bool Player::Go(const vector<string>& args)
 {
-	// Get Room from Player (Creature)
+	// Get Room from Player
 	Room* room = GetCurrentRoom();
 	// Check Exit from Room
 	Exit* ex = room->GetExit(args[1]);
@@ -122,7 +122,7 @@ bool Player::PickFromRoom(const vector<string>& args, bool to_bag) {
 
 	if (item == NULL)
 	{
-		cout << "This item desn't exist." << endl;
+		cout << "This item doesn't exist." << endl;
 		return false;
 	}
 
@@ -183,7 +183,7 @@ bool Player::Drop(const vector<string>& args) {
 		Entity* item = Find(args[1], ITEM);
 		if (item == NULL) {
 			cout << "You don't have this item in the inventory. "
-				"Try to find it in the bag" << endl;
+				"Try to find it in the bag." << endl;
 			return false;
 		}
 		else {
@@ -362,7 +362,7 @@ bool Player::Unlock(const vector<string>& args) {
 	}
 	Item* item = (Item*)FindInverntoryItem(args[3]);
 	if (item == NULL) { return false; }
-	if (!Compare(item->name, "Card")) {
+	if (!(exit->key == item)) {
 		cout << "You cannot unlock the door with this object." << endl;
 		return false;
 	}

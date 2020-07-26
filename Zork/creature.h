@@ -13,7 +13,7 @@ class Room;
 class Item;
 class Npc;
 
-class Creature: public Entity
+class Creature : public Entity
 {
 public:
 	Creature(const char* name, const char* description, Room* location);

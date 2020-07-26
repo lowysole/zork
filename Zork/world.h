@@ -10,14 +10,13 @@ using namespace std;
 class Entity;
 class Player;
 
-class World 
+class World
 {
 private:
 	list<Entity*> entities;
 	Player* player;
-	char* player_name;
 
-public :	
+public:
 	World();
 	~World();
 

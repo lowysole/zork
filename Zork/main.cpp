@@ -46,7 +46,7 @@ int main()
 		else if (my_world.CheckVictory()) {
 			cout << "------------------" << endl;
 			cout << "Mission completed. " << endl;
-			cout << "You've save the virtual humanity. "
+			cout << "You've saved the virtual humanity. "
 				"Please, come now to save the real world." << endl;
 			break;
 		}
@@ -61,6 +61,6 @@ int main()
 
 	cout << endl << "\nThanks for playing, Bye!" << endl;
 	cout << "------------------" << endl;
-	cout << "Credits: @lowysole" << endl;
+	cout << "Credits: github@lowysole" << endl;
 	return 0;
 }

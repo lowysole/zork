@@ -4,8 +4,9 @@
 
 //Constructor
 Creature::Creature(const char* name, const char* description, Room* location) :
-Entity(name, description, (Entity*)location) {
+	Entity(name, description, (Entity*)location) {
 	entity_type = CREATURE;
+	creature_type = NPC;
 	this->location = location;
 	hp = 10;
 	attack = 0;
@@ -35,7 +36,7 @@ void Creature::Look()
 }
 
 Room* Creature::GetCurrentRoom() {
-	return (Room*) parent;
+	return (Room*)parent;
 }
 
 void Creature::Stats() {
@@ -47,9 +48,8 @@ void Creature::Stats() {
 	cout << "Attack: " << attack << endl;
 	cout << "Weapon: " <<
 		((weapon) ? weapon->name : "no weapon equiped") << endl;
-
-
 }
+
 void Creature::KillNPC(Npc* npc) {
 	npc->hp = 0;
 

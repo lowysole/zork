@@ -9,7 +9,7 @@
 
 using namespace std;
 
-class Player: public Creature
+class Player : public Creature
 {
 public:
 	Player(const char* name, const char* description, Room* location);

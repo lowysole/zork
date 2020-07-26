@@ -59,7 +59,29 @@ First, you need to go to the operations room, pick the Scalpel, and equip it. Go
 
 Commands (for Speed Run):
 
-`go hall; go elevator; go operations; pick scalpel to bag; equip scalpel from bag; go elevator; attack worker; pick protection to bag; equip protection from bag; go hall; go security; attack guard; pick card; go hall; go elevator; unlock infirmary with card; go infirmary; pick virus to bag; go elevator; go hall; go garden;`
+```
+go hall
+go elevator
+go operations
+pick scalpel to bag
+equip scalpel from bag
+go elevator
+attack worker
+pick protection to bag
+equip protection from bag
+go hall
+go security
+attack guard
+pick card
+go hall
+go elevator
+unlock infirmary with card
+go infirmary
+pick virus to bag
+go elevator
+go hall
+go garden
+```
 
 ## Further developments
 Some ideas for next developments are:

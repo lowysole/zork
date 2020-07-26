@@ -48,8 +48,28 @@ List of commands:
 	 - `help` - List the commands
  - Quit
 	 - `quit` - Quit the game
-   
+	 
+## How to finish the game
+
+(Better experience) - Skip this part and try to play by yourself. Investigate each room, looking at your inventory and stats, picking and equipping the objects, and come back here if you need some help.
+
+Instructions:
+
+First, you need to go to the operations room, pick the Scalpel, and equip it. Go back to the elevator, kill the worker, and equip the protection. Now you will be able to kill the guard from the security room and pick the key that he will drop. Go back to the elevator, unlock the infirmary, enter it and pick the virus. Go back to the garden and you will complete the mission.
+
+Commands (for Speed Run):
+
+`go hall; go elevator; go operations; pick scalpel to bag; equip scalpel from bag; go elevator; attack worker; pick protection to bag; equip protection from bag; go hall; go security; attack guard; pick card; go hall; go elevator; unlock infirmary with card; go infirmary; pick virus to bag; go elevator; go hall; go garden;`
+
+## Further developments
+Some ideas for next developments are:
+  - Have good and bad NPCs
+  - Add conversations between Player and NPC to add value to this figure and clues
+  - The player can lose combats and die
+  - Add more rooms, items, and more complexity
+  
   
 ### Credit
-Llorenç Solé Franquesa ~ @lowysole. 
+Llorenç Solé Franquesa ~ @lowysole.
+
 GitHub: https://github.com/lowysole

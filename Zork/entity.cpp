@@ -1,5 +1,6 @@
 #include "entity.h"
 #include "utils.h"
+#include "item.h"
 
 //Constructor
 Entity::Entity(const char* name, const char* description, Entity* parent = NULL) {
@@ -30,6 +31,7 @@ void Entity::SetNewParent(Entity* new_parent) {
 	}
 }
 
+// Find all objects of type
 list<Entity*> Entity::FindAll(EntityType type)
 {
 	list<Entity*> list_items;
@@ -41,6 +43,7 @@ list<Entity*> Entity::FindAll(EntityType type)
 	return list_items;
 }
 
+// Find object of type
 Entity* Entity::Find(const string& name, EntityType type) {
 	list<Entity*> list_items;
 	for (list<Entity*>::const_iterator it = container.begin(); it != container.cend(); ++it) {
@@ -54,3 +57,24 @@ Entity* Entity::Find(const string& name, EntityType type) {
 }
 
 
+//Find item in the inventory. Else, in the bag.
+//Return item
+Entity* Entity::FindInverntoryItem(const string& name) {
+	Item* item = (Item*)Find(name, ITEM);
+	if (item == NULL) {
+		Item* item = (Item*)Find("bag", ITEM);
+		if (item == NULL) {
+			cout << "Bag has been dropped." << endl;
+			return false;
+		}
+		Item* bag_item = (Item*)item->Find(name, ITEM);
+		if (bag_item == NULL) {
+			cout << "You don't have this item in the inventory." << endl;
+			return false;
+		}
+		else
+			return bag_item;
+	}
+	else 
+		return item;
+}

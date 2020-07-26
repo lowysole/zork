@@ -25,7 +25,8 @@ public:
 	void Look();
 	void SetNewParent(Entity* new_parent);
 	list<Entity*> FindAll(EntityType type);
-	Entity* Find(const string& object, EntityType type);
+	Entity* Find(const string& name, EntityType type);
+	Entity* FindInverntoryItem(const string& name);
 	
 
 	EntityType entity_type;

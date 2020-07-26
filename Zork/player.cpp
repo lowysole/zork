@@ -282,27 +282,9 @@ bool Player::EquipObject(Item* item) {
 
 bool Player::Unequip(const vector <string>& args) {
 	//Look inventory
-	Item* item = (Item*)Find(args[1], ITEM);
-	if (item == NULL) {
-		// Find inside bag
-		Item* item = (Item*)Find("bag", ITEM);
-		if (item == NULL) {
-			cout << "Bag has been dropped." << endl;
-			return false;
-		}
-		Item* bag_item = (Item*)item->Find(args[1], ITEM);
-		if (bag_item == NULL) {
-			cout << "You don't have this item in the inventory." << endl;
-			return false;
-		}
-		else {
-			return UnequipObject(bag_item);
-		}
-	}
-	else {
-		return UnequipObject(item);
-	}
-
+	Item* item = (Item*) FindInverntoryItem(args[1]);
+	if (item == NULL) { return false; }
+	return UnequipObject(item);
 }
 
 bool Player::UnequipObject(Item* item) {
@@ -352,6 +334,7 @@ bool Player::Attack(const vector<string>& args) {
 			return false;
 		}
 		else {
+			cout << "You win the combat!" << endl;
 			KillNPC(npc);
 			return true;
 		}
@@ -360,28 +343,30 @@ bool Player::Attack(const vector<string>& args) {
 }
 
 bool Player::Inspect(const vector<string>& args) {
-	//Look inventory
-	Item* item = (Item*)Find(args[1], ITEM);
-	if (item == NULL) {
-		// Find inside bag
-		Item* item = (Item*)Find("bag", ITEM);
-		if (item == NULL) {
-			cout << "Bag has been dropped." << endl;
-			return false;
-		}
-		Item* bag_item = (Item*)item->Find(args[1], ITEM);
-		if (bag_item == NULL) {
-			cout << "You don't have this item in the inventory." << endl;
-			return false;
-		}
-		else {
-			((Entity*)bag_item)->Look();
-			return true;
-		}
-	}
-	else {
-		((Entity*)item)->Look();
-		return true;
-	}
+	Item* item = (Item*)FindInverntoryItem(args[1]);
+	if (item == NULL) { return false; }
+	((Entity*)item)->Look();
+	return true;
+}
 
+bool Player::Unlock(const vector<string>& args) {
+	Room* room = GetCurrentRoom();
+	Exit* exit = (Exit*)(room->Find(args[1], EXIT));
+	if (exit == NULL) {
+		cout << "There isn't this door in this room." << endl;
+		return false;
+	}
+	else if (!exit->locked) {
+		cout << "This door isn't locked." << endl;
+		return false;
+	}
+	Item* item = (Item*) FindInverntoryItem(args[3]);
+	if (item == NULL) { return false; }
+	if (!Compare(item->name,"Card")) {
+		cout << "You cannot unlock the door with this object." << endl;
+		return false;
+	}
+	exit->locked = false;
+	cout << "Room " << exit->name << " unlocked." << endl;
+	return true;
 }

@@ -11,6 +11,8 @@
 
 World::World() {
 
+	// TODO: Fix all changes
+	// TODO: Finish check
 
 	// Create Rooms
 	Room* garden = new Room("Garden",
@@ -40,7 +42,7 @@ World::World() {
 	cout << "What's your name?" << endl << "> ";
 	getline(cin, name_input);
 	cout << "> ";
-	player = new Player(name_input.c_str(), "You're the secret agent!", security_room);
+	player = new Player(name_input.c_str(), "You're the secret agent!", elevator);
 	player->hp = 8;
 	player->attack = 8;
 
@@ -90,7 +92,7 @@ World::World() {
 		"Letter", "Mission: You need to recover the virus "
 		"and escape from the hospital", garden);
 	Item* key = new Item(
-		"Card", "Card to enter to the infarmary.", security_guard);
+		"Card", "Card to enter to the infarmary.", elevator);
 	ex_elevator_infirmary->key = key;
 	Item* scalpel = new Item(
 		"Scalpel", "Scalpel from the last operation",
@@ -190,7 +192,7 @@ bool World::ParseCommand(vector<string>& args) {
 		{
 			if (Compare(args[0], "unlock"))
 			{
-				// TODO: Unlock
+				player->Unlock(args);
 			}
 			else if (Compare(args[0], "pick"))
 			{

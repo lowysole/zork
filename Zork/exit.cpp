@@ -24,6 +24,7 @@ const string& Exit::GetNameDestination(const Room* room) {
 	else if (room == destination) {
 		return opposite_name;
 	}
+	return "";
 }
 
 Room* Exit::GetRoomDestination(const Room* room) {
@@ -33,4 +34,5 @@ Room* Exit::GetRoomDestination(const Room* room) {
 	else if (room == destination) {
 		return (Room*) parent;
 	}
+	return false;
 }

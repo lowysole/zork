@@ -9,6 +9,14 @@ We are on 2020. This hospital has a virus (corona-shaped) that can cause global 
 
 ##  Instalation
 
+Game for Windows(x86)
+
+Steps:
+- Go to last release: https://github.com/lowysole/zork/releases/tag/v1.0.1
+- Download https://github.com/lowysole/zork/files/4978210/Zork.zip
+- Uncompress it
+- Execute it
+
 ## How to play
 
 List of commands:
@@ -57,7 +65,7 @@ Instructions:
 
 First, you need to go to the operations room, pick the Scalpel, and equip it. Go back to the elevator, kill the worker, and equip the protection. Now you will be able to kill the guard from the security room and pick the key that he will drop. Go back to the elevator, unlock the infirmary, enter it and pick the virus. Go back to the garden and you will complete the mission.
 
-Commands (for Speed Run):
+Commands (for Speed Run, copy & paste):
 
 ```
 go hall

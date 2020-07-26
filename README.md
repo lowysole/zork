@@ -4,10 +4,10 @@ This is a console game written with C++ using Visual Studio 2017 Community.
 It's a Zork style game. You need to investigate the rooms of the game picking objects and deciphering the unknowns that the level raises.
 
 ### Story
-We are on 2020. This hospital has a virus (corona-shaped) that can cause global chaos. You're a secret agent. Your mission? To recover that virus before it is too late. Take it back. Good Luck.
+We are in 2020. This hospital has a virus (corona-shaped) that can cause global chaos. You're a secret agent. Your mission? To recover that virus before it is too late. Take it back. Good Luck.
 
 
-##  Instalation
+##  Installation
 
 Game for Windows(x86)
 
